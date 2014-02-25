@@ -14,7 +14,9 @@ var hasIssues = {
         debugger:false,
         domain:'https://api.github.com/repos/',
         username:"",
-        title:"Project Issues"
+        title:"Project Issues",
+        forkit:' <span class="forkme"> Fork it on <a itemprop="url" href="https://github.com/061375/mRain" target="_blank">GitHub</a></span>',
+        display_forkit:true
     },
     init: function(obj) {
         if (typeof obj.debugger !== 'undefined') {
@@ -29,6 +31,12 @@ var hasIssues = {
         if (typeof obj.title !== 'undefined') {
             this.private.title = obj.title;
         }
+        if (typeof obj.forkme !== 'undefined') {
+            this.private.forkit = obj.forkit;
+        }
+        if (typeof obj.display_forkit !== 'undefined') {
+            this.private.display_forkit = obj.display_forkit;
+        }
     },
     /**
     * @method getIssues
@@ -38,6 +46,7 @@ var hasIssues = {
     */
     getIssues: function(project,target) {
         var $target = $(target);
+        this.core.logThis('getIssues');
         var loader = document.createElement("div");
         $(loader).attr("class","loader");
         $(loader).html("Loading...Please Wait");
@@ -47,7 +56,7 @@ var hasIssues = {
         var promise = this.core.getData(url);
         this.receiveIssues(promise,function(e) {
             $(loader).remove();
-            hasIssues.buildIssueTable(e,$target);
+            hasIssues.buildIssueTable(e,target);
         });
     },
     receiveIssues: function(p,callback) {
@@ -74,8 +83,12 @@ var hasIssues = {
             hasIssues.core.logThis(err);
         });
     },
-    buildIssueTable: function(issues,$target) {
+    buildIssueTable: function(issues,target) {
+        var $target = $(target);
         hasIssues.core.logThis('buildIssueTable '+issues);
+        if (hasIssues.private.display_forkit) {
+            hasIssues.private.title += hasIssues.private.forkit;
+        }
         var h2 = document.createElement("h2");
         $(h2).html(hasIssues.private.title);
         var table = document.createElement("table");
@@ -88,6 +101,7 @@ var hasIssues = {
         $target.append(h2);
         $(table).html(_table);
         $target.append(table);
+        hasIssues.core.logThis('buildIssueTable :: Append table '+$target.attr("id"));
         $target.on("click","._title",function(){
             $(this).parent('tr').next().toggle("fast");
         });

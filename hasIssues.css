@@ -4,7 +4,7 @@
         }
         .has_issues
         {
-            width: 800px;
+            width: 100%;
         }
         .has_issues td
         {
@@ -85,4 +85,8 @@
             width: 10px;
             height: 10px;
             float: left;
+        }
+        .forkme
+        {
+            font-size:  12px;
         }
