@@ -15,7 +15,7 @@ var hasIssues = {
         domain:'https://api.github.com/repos/',
         username:"",
         title:"Project Issues",
-        forkit:' <span class="forkme"> Fork it on <a itemprop="url" href="https://github.com/061375/Display-Issues" target="_blank">GitHub</a></span>',
+        forkit:' <span class="forkme"> hasIssues By <a href="http://061375.com/articles/view/Misc/20140222093714" rel="author">Jeremy Heminger</a> - Fork it on <a itemprop="url" href="https://github.com/061375/Display-Issues" target="_blank">GitHub</a></span>',
         display_forkit:true
     },
     init: function(obj) {
@@ -86,9 +86,6 @@ var hasIssues = {
     buildIssueTable: function(issues,target) {
         var $target = $(target);
         hasIssues.core.logThis('buildIssueTable '+issues);
-        if (hasIssues.private.display_forkit) {
-            hasIssues.private.title += hasIssues.private.forkit;
-        }
         var h2 = document.createElement("h2");
         $(h2).html(hasIssues.private.title);
         var table = document.createElement("table");
@@ -101,6 +98,11 @@ var hasIssues = {
         $target.append(h2);
         $(table).html(_table);
         $target.append(table);
+        if (hasIssues.private.display_forkit) {
+            var p = document.createElement("p");
+            $(p).html(hasIssues.private.forkit);
+            $target.append(p);
+        }
         hasIssues.core.logThis('buildIssueTable :: Append table '+$target.attr("id"));
         $target.on("click","._title",function(){
             $(this).parent('tr').next().toggle("fast");
