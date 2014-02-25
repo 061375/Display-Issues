@@ -15,7 +15,7 @@ var hasIssues = {
         domain:'https://api.github.com/repos/',
         username:"",
         title:"Project Issues",
-        forkit:' <span class="forkme"> Fork it on <a itemprop="url" href="https://github.com/061375/mRain" target="_blank">GitHub</a></span>',
+        forkit:' <span class="forkme"> Fork it on <a itemprop="url" href="https://github.com/061375/Display-Issues" target="_blank">GitHub</a></span>',
         display_forkit:true
     },
     init: function(obj) {
