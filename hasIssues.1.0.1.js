@@ -30,6 +30,12 @@ var hasIssues = {
             this.private.title = obj.title;
         }
     },
+    /**
+    * @method getIssues
+    * @param project {String} : Name of the project to be displayed
+    * @param target {String} : DOM element to be targetted
+    *                          Use CSS selector standards
+    */
     getIssues: function(project,target) {
         var $target = $(target);
         var loader = document.createElement("div");
